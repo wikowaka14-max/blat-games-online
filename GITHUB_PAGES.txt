@@ -1,0 +1,20 @@
+КАК ЗАЛИТЬ НА GITHUB PAGES
+
+1. Создай репозиторий на GitHub, например:
+   blat-games-online
+
+2. Загрузи в репозиторий файлы:
+   index.html
+   style.css
+   app.js
+   firebase-config.js
+
+3. Включи Pages:
+   Settings -> Pages
+   Source: Deploy from a branch
+   Branch: main
+   Folder: /root
+   Save
+
+4. Ссылка будет примерно:
+   https://твойник.github.io/blat-games-online/

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blat Games Online</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="glow" id="glow"></div>
+
+  <header class="header">
+    <a class="logo" href="#top"><span>BG</span> Blat Games</a>
+    <nav>
+      <a href="#login">Вход</a>
+      <a href="#games">Игры</a>
+      <a href="#wallet">Баланс</a>
+      <a href="#admin">Админ</a>
+    </nav>
+    <button class="top-btn" onclick="scrollToBlock('login')">Войти</button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-text">
+        <div class="badge"><i></i> lobby online</div>
+        <h1>Игры с группашами <b>на БлатКоины</b></h1>
+        <p>
+          Шахматы, шашки, дурак, blackjack-тренировка, общий баланс игроков,
+          уникальные ники и админ-команды.
+        </p>
+
+        <div class="actions">
+          <button class="btn primary" onclick="scrollToBlock('login')">🚀 Залететь</button>
+          <button class="btn ghost" onclick="scrollToBlock('games')">🎮 Игры</button>
+        </div>
+
+        <div class="stats">
+          <div><b>5000</b><span>старт БК</span></div>
+          <div><b>veyr1x</b><span>главный админ</span></div>
+          <div><b>/pay</b><span>выдача БК</span></div>
+        </div>
+      </div>
+
+      <div class="phone">
+        <div class="phone-top"><span></span><span></span><span></span></div>
+        <div class="screen">
+          <p class="msg bot">🎮 Выбери игру</p>
+          <div class="chips">
+            <button>♟ Шахматы</button>
+            <button>⛂ Шашки</button>
+            <button>🃏 Blackjack</button>
+          </div>
+          <p class="msg user">/pay dimas 500</p>
+          <p class="msg ok">✅ dimas +500 БК</p>
+          <p class="msg bot">Баланс: 5500 БлатКоинов</p>
+        </div>
+        <div class="float f1">♟</div>
+        <div class="float f2">⛂</div>
+        <div class="float f3">🂡</div>
+      </div>
+    </section>
+
+    <section class="panel" id="login">
+      <div>
+        <span class="tag">Вход</span>
+        <h2>Введи ник</h2>
+        <p>
+          Ник должен быть уникальным. Первый вход даёт <b>5000 БлатКоинов</b>.
+          Главный админ: <b>veyr1x</b>.
+        </p>
+        <p class="mode" id="modeText">Проверка режима...</p>
+      </div>
+
+      <div class="login-box">
+        <input id="nickInput" placeholder="например: dimas" maxlength="18" />
+        <button class="btn primary" onclick="login()">Войти</button>
+
+        <div class="profile">
+          <p>Ник: <b id="profileNick">не выбран</b></p>
+          <p>Баланс: <b id="profileCoins">0</b> БК</p>
+          <p>Роль: <b id="profileRole">игрок</b></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="games">
+      <div class="title">
+        <span class="tag">Игры</span>
+        <h2>Игровая зона</h2>
+        <p>Blackjack тут без ставок и без списания баланса — просто тренировка, чтобы не делать казино.</p>
+      </div>
+
+      <div class="cards">
+        <article onclick="openGame('checkers')"><span>⛂</span><h3>Шашки</h3><p>Демо-доска: выбрал шашку → выбрал клетку.</p></article>
+        <article onclick="openGame('chess')"><span>♟</span><h3>Шахматы</h3><p>Демо-доска с фигурами для быстрых партий на одном экране.</p></article>
+        <article onclick="openGame('durak')"><span>🂡</span><h3>Дурак</h3><p>Демо-рука и стол. Карты можно обновлять.</p></article>
+        <article onclick="openGame('blackjack')"><span>🃏</span><h3>Blackjack</h3><p>Тренировка 21 без ставок и без потери БК.</p></article>
+      </div>
+
+      <div class="game-box">
+        <div class="game-head">
+          <div>
+            <span class="tag">Открыто</span>
+            <h2 id="gameTitle">Шашки</h2>
+          </div>
+          <button class="btn ghost small" onclick="resetGame()">Сбросить</button>
+        </div>
+        <div id="gameRender"></div>
+      </div>
+    </section>
+
+    <section class="section" id="wallet">
+      <div class="title">
+        <span class="tag">Баланс</span>
+        <h2>Топ игроков</h2>
+        <p>БлатКоины — виртуальные очки для фана, не реальные деньги.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Ник</th><th>Баланс</th><th>Роль</th></tr>
+          </thead>
+          <tbody id="playersTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="admin" id="admin">
+      <div>
+        <span class="tag">Админка</span>
+        <h2>Команды</h2>
+        <p>Главный админ <b>veyr1x</b> может добавлять админов.</p>
+
+        <div class="commands">
+          <code>/pay nick 500</code>
+          <code>/pay nick -300</code>
+          <code>/addadmin nick</code>
+          <code>/deladmin nick</code>
+        </div>
+
+        <p class="warn">
+          Если сайт лежит только на GitHub Pages, админ-код нельзя спрятать идеально.
+          Для полной защиты нужен сервер.
+        </p>
+      </div>
+
+      <div class="admin-box">
+        <input id="adminCode" type="password" placeholder="админ-код" />
+        <input id="adminCommand" placeholder="/pay dimas 500" />
+        <button class="btn primary" onclick="runAdminCommand()">Выполнить</button>
+        <div class="log" id="adminLog">Готов к командам.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Blat Games Online • для своих • без реальных ставок</footer>
+
+  <script src="firebase-config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

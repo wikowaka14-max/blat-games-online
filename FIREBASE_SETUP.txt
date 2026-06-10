@@ -1,0 +1,35 @@
+КАК СДЕЛАТЬ ОБЩУЮ БАЗУ ЧЕРЕЗ FIREBASE
+
+1. Зайди на:
+   https://console.firebase.google.com
+
+2. Create project / Создать проект.
+
+3. После создания проекта:
+   Build -> Realtime Database
+
+4. Нажми Create Database.
+
+5. Для простого теста выбери test mode.
+   ВАЖНО: test mode не для серьёзной защиты, только для проверки.
+
+6. Потом зайди:
+   Project settings -> General -> Your apps -> Web app
+
+7. Создай Web app и скопируй firebaseConfig.
+
+8. Открой файл:
+   firebase-config.js
+
+9. Замени там все ВСТАВЬ_... на данные из firebaseConfig.
+
+10. Сохрани и заново загрузи firebase-config.js на GitHub.
+
+Проверка:
+- один человек входит с ником dimas
+- второй не сможет взять этот же ник
+- veyr1x входит и получает роль главного админа
+- в админке с кодом 183729 можно:
+  /pay dimas 500
+  /addadmin nick
+  /deladmin nick
